@@ -1,0 +1,457 @@
+# F:\MERN\React\React-Projects\real-estate-react\src\App.jsx
+import { Navbar } from "./components/Navbar";
+import { HeroSection } from "./components/HeroSection";
+import { Slider } from "./components/Slider";
+import { Accordination } from "./components/Accordination";
+import { ContactUs } from "./components/ContactUs";
+import { Footer } from "./components/Footer";
+import { GetStarted } from "./components/GetStarted";
+import { CompanyLogos } from "./components/CompanyLogos";
+
+export default function App() {
+  return (
+    <>
+      <Navbar />
+      <HeroSection />
+      <CompanyLogos />
+      <Slider />
+      <Accordination />
+      <ContactUs />
+      <GetStarted />
+      <Footer />
+    </>
+  );
+}
+
+
+# F:\MERN\React\React-Projects\real-estate-react\src\main.jsx
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App.jsx";
+import "./index.css"
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
+
+# F:\MERN\React\React-Projects\real-estate-react\src\common\Accordion.jsx
+import {
+  RiArrowDownSFill,
+  RiCloseFill,
+  RiShieldCheckFill,
+  RiWallet2Fill,
+} from "@remixicon/react";
+import { useState, useEffect } from "react";
+
+export const Accordion = ({ id, title, desc, accordion, setAccordion }) => {
+  const isOpen = accordion === id;
+
+  const toggleAccordion = () => {
+    setAccordion(isOpen ? null : id);
+  };
+
+  return (
+    <div className="p-3 bg-white space-y-3 border-b">
+      <div
+        className="flex items-center justify-between cursor-pointer"
+        onClick={toggleAccordion}
+      >
+        <div className="p-[0.15em] bg-slate-300 rounded-md">
+          {id == 0 && <RiShieldCheckFill className="text-blue-600" />}
+          {id == 1 && <RiCloseFill className="text-blue-600" />}
+          {id == 2 && <RiWallet2Fill className="text-blue-600" />}
+        </div>
+        <span className="text-blue-900 font-bold text-lg">{title}</span>
+        <div className="p-[0.15em] bg-slate-300 rounded-md">
+          <RiArrowDownSFill
+            className={`text-blue-600 transition-transform duration-300 ${
+              isOpen ? "transform rotate-180" : ""
+            }`}
+          />
+        </div>
+      </div>
+      <div
+        className={`overflow-hidden transition-all duration-300 ${
+          isOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
+        }`}
+      >
+        <p className="text-slate-400 mt-2">{desc}</p>
+      </div>
+    </div>
+  );
+};
+
+
+# F:\MERN\React\React-Projects\real-estate-react\src\common\Contact.jsx
+import {
+  RiChat3Fill,
+  RiMessage2Fill,
+  RiPhoneFill,
+  RiVideoChatFill,
+} from "@remixicon/react";
+
+export const Contact = ({ title }) => {
+  return (
+    <div className="text-black flex flex-col gap-4 p-4">
+      <div className="flex items-center gap-6">
+        <div className="p-[0.5em] bg-slate-200 rounded-md">
+          {title === "Call" && <RiPhoneFill className="text-blue-700" />}
+          {title === "Chat" && <RiChat3Fill className="text-blue-700" />}
+          {title === "Video Call" && (
+            <RiVideoChatFill className="text-blue-700" />
+          )}
+          {title === "Message" && <RiMessage2Fill className="text-blue-700" />}
+        </div>
+        <div className="flex flex-col">
+          <h1 className="text-xl font-bold text-blue-700 ">{title}</h1>
+          <h3 className="text-slate-400">324 455 356 34</h3>
+        </div>
+      </div>
+      <button className="p-[0.5em] bg-slate-200 rounded-md w-full hover:bg-blue-700 hover:text-white transition-all ease-in-out duration-500 hover:scale-90">{`${title} Now`}</button>
+    </div>
+  );
+};
+
+
+# F:\MERN\React\React-Projects\real-estate-react\src\common\Count.jsx
+import { RiAddFill } from "@remixicon/react";
+
+export const Count = ({ number, text }) => {
+  return (
+    <div className="">
+      <h1 className="text-4xl font-bold text-cleft flex-center gap-3">
+        {number} <RiAddFill className="text-primary-600" />
+      </h1>
+      <p className="text-slate-500">{text}</p>
+    </div>
+  );
+};
+
+
+# F:\MERN\React\React-Projects\real-estate-react\src\common\Search.jsx
+import { RiMapPinFill } from "@remixicon/react";
+
+export const Search = () => {
+  return (
+    <div className="rounded-md flex items-center p-2 px-4 bg-white lg:w-full sm:w-2/3 w-[90%]">
+      <RiMapPinFill className="text-primary-500" size={32} />
+      <input
+        type="text"
+        className="w-full p-2 px-4 text-black focus:outline-none"
+      />
+      <button className="bg-primary-500 hover:bg-primary-600 text-white font-semibold py-2 px-3 rounded-md hover:scale-110 transition-all">
+        Search
+      </button>
+    </div>
+  );
+};
+
+
+# F:\MERN\React\React-Projects\real-estate-react\src\components\Accordination.jsx
+import { useState } from "react";
+import { Accordion } from "../common/Accordion";
+
+export const Accordination = () => {
+  const [accordion, setAccordion] = useState("0");
+  const data = {
+    0: {
+      title: "Best interest rates on the market",
+      desc: "Exercitation in fugiat est ut ad ea cupidatat ut in cupidatat occaecat ut occaecat consequat est minim minim esse tempor laborum consequat esse adipisicing eu reprehenderit enim.",
+    },
+    1: {
+      title: "Prevent unstable prices",
+      desc: "Exercitation in fugiat est ut ad ea cupidatat ut in cupidatat occaecat ut occaecat consequat est minim minim esse tempor laborum consequat esse adipisicing eu reprehenderit enim.",
+    },
+    2: {
+      title: "Best price on the market",
+      desc: "Exercitation in fugiat est ut ad ea cupidatat ut in cupidatat occaecat ut occaecat consequat est minim minim esse tempor laborum consequat esse adipisicing eu reprehenderit enim.",
+    },
+  };
+
+  return (
+    <div className="w-full flex min-h-screen flex-col lg:flex-row p-10 lg:gap-10 gap-[5rem]">
+      <div className="lg:w-1/2 w-full flex-center">
+        <img
+          src="./images/value.png"
+          alt="hero"
+          className="min-h-[60vh] lg:min-h-[80vh] w-3/4 sm:w-3/6 lg:w-full rounded-2xl rounded-t-[15rem]  border-primary-600 border-4"
+        />
+      </div>
+      <div className="lg:w-1/2 w-full flex justify-center items-start flex-col gap-4">
+        <h1 className="text-3xl text-primary-500 font-bold">Our Value</h1>
+        <h1 className="text-4xl text-blue-600 font-bold">
+          Value We Give to You
+        </h1>
+        <p className="truncate-tighter text-slate-400">
+          We are always ready to help by providing the best services for you. We
+          believe a good place to live can make your life better.
+        </p>
+        <div className="accordions flex flex-col gap-4 pt-6">
+          {Object.keys(data).map((key) => (
+            <Accordion
+              key={key}
+              id={key}
+              title={data[key].title}
+              desc={data[key].desc}
+              accordion={accordion}
+              setAccordion={setAccordion}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+
+# F:\MERN\React\React-Projects\real-estate-react\src\components\CompanyLogos.jsx
+export const CompanyLogos = () => {
+  return (
+    <div className="flex items-center md:px-10 p-4 justify-between bg-white">
+      <img src="/images/prologis.png" alt="" className="w-1/5" />
+      <img src="/images/tower.png" alt="" className="w-1/5" />
+      <img src="/images/realty.png" alt="" className="w-1/5" />
+      <img src="/images/equinix.png" alt="" className="w-1/5" />
+    </div>
+  );
+};
+
+
+# F:\MERN\React\React-Projects\real-estate-react\src\components\ContactUs.jsx
+import { Contact } from "../common/Contact";
+
+export const ContactUs = () => {
+  return (
+    <div className="w-full bg-white flex min-h-screen flex-col lg:flex-row p-10 lg:gap-10 gap-[3rem]">
+      <div className="lg:w-1/2 w-full flex justify-center items-start flex-col gap-4">
+        <h1 className="text-3xl text-primary-500 font-bold">
+          Way to Contact Us
+        </h1>
+        <h1 className="text-4xl text-blue-600 font-bold">Easy to Contact Us</h1>
+        <p className="truncate-tighter text-slate-400">
+          We always ready to help by providijng the best services for you. We
+          beleive a good blace to live can make your life better
+        </p>
+        <div className="w-full md:w-5/6 lg:w-full grid grid-cols-2 gap-2">
+          <Contact title="Call" />
+          <Contact title="Chat" />
+          <Contact title="Video Call" />
+          <Contact title="Message" />
+        </div>
+      </div>
+      <div className="lg:w-1/2 w-full flex-center">
+        <img
+          src="./images/contact.jpg"
+          alt="hero"
+          className="h-[80vh] lg:min-h-[80vh] w-3/4 sm:w-3/6 lg:w-full rounded-2xl rounded-t-[15rem]  border-primary-600 border-4"
+        />
+      </div>
+    </div>
+  );
+};
+
+
+# F:\MERN\React\React-Projects\real-estate-react\src\components\Footer.jsx
+export const Footer = () => {
+  return (
+    <div className="px-10 py-8 bg-white">
+      <div className="flex items-center justify-between">
+        <div className="left">
+          <img src="/images/logo2.png" alt="logo-2" />
+          <p className="text-slate-500 w-[240px]">
+            Our vision is to make all people the best place to live for them.
+          </p>
+        </div>
+        <div className="right">
+          <h3 className="text-5xl font-bold text-blue-800">Information</h3>
+          <p className="text-slate-500 my-2">145 Hyderabad, AP, India</p>
+          <div className="hidden md:flex items-center space-x-10">
+            <a href="#" className=" text-black">
+              Home
+            </a>
+            <a href="#" className=" text-black">
+              About
+            </a>
+            <a href="#" className=" text-black">
+              Services
+            </a>
+            <a href="#" className=" text-black">
+              Contact
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+
+# F:\MERN\React\React-Projects\real-estate-react\src\components\GetStarted.jsx
+export const GetStarted = () => {
+  return (
+    <div className="p-10">
+      <div className="rounded-xl bg-blue-700 p-10 flex-center flex-col gap-4">
+        <h1 className="text-3xl text-white font-bold">
+          Get started with Homyz
+        </h1>
+        <p className="text-slate-300 w-1/2 text-center">
+          Subscribe and find super attractive price quotes from us. Find your
+          residence soon
+        </p>
+        <button className="bg-white font-bold text-blue-700 p-4 px-8 rounded-md hover:bg-blue-700 hover:text-white transition-all ease-in-out duration-500 hover:scale-105 border-2 border-blue-700 hover:border-white">
+          Get Started
+        </button>
+      </div>
+    </div>
+  );
+};
+
+
+# F:\MERN\React\React-Projects\real-estate-react\src\components\HeroSection.jsx
+import { Count } from "../common/Count";
+import { Search } from "../common/Search";
+
+export const HeroSection = () => {
+  return (
+    <div className="mt-[5rem] w-full flex min-h-screen flex-col lg:flex-row p-10 lg:gap-10 gap-[5rem]">
+      <div className="lg:w-1/2 w-full flex justify-center items-start flex-col gap-10">
+        <div className="heading flex flex-col gap-2 relative z-5">
+          <h1 className="text-6xl font-bold text-cleft">Discover</h1>
+          <h1 className="text-6xl font-bold text-cleft">Most Suitable</h1>
+          <h1 className="text-6xl font-bold text-cleft">Property</h1>
+          <div className="circle"></div>
+        </div>
+        <p className="text-left text-slate-400 lg:w-full sm:w-[70%] w-[90%]">
+          Find a variety of properties that suit you very easilty Forget all
+          difficulties in finding a residence for you
+        </p>
+        <Search />
+        <div className="flex w-full sm:w-3/4 lg:w-full justify-between">
+          <Count number={9000} text={"Premium Product"} />
+          <Count number={2000} text={"Happy Customer"} />
+          <Count number={28} text={"Awards Winning"} />
+        </div>
+      </div>
+      <div className="lg:w-1/2 w-full flex-center">
+        <img
+          src="./images/hero-image.png"
+          alt="hero"
+          className="min-h-[60vh] lg:min-h-[80vh] w-3/4 sm:w-3/6 lg:w-full rounded-2xl rounded-t-[15rem]  border-primary-600 border-4"
+        />
+      </div>
+    </div>
+  );
+};
+
+
+# F:\MERN\React\React-Projects\real-estate-react\src\components\Navbar.jsx
+import { RiMenu4Fill } from "@remixicon/react";
+
+export const Navbar = () => {
+  return (
+    <div className="container w-full flex items-center justify-between md:px-10 px-5 py-2 bg-black fixed top-0 left-0 z-10">
+      <img src="./images/logo.png" alt="logo" />
+      <div className="hidden md:flex items-center space-x-10">
+        <a href="#" className="text-white">
+          Home
+        </a>
+        <a href="#" className="text-white">
+          About
+        </a>
+        <a href="#" className="text-white">
+          Services
+        </a>
+        <a href="#" className="text-white">
+          Contact
+        </a>
+      </div>
+      <div className="md:hidden flex items-center">
+        <RiMenu4Fill size={30} />
+      </div>
+    </div>
+  );
+};
+
+
+# F:\MERN\React\React-Projects\real-estate-react\src\components\Slider.jsx
+import { RiExchangeDollarFill } from "@remixicon/react";
+
+export const Slider = () => {
+  const data = [
+    {
+      id: 1,
+      img: "./images/r1.png",
+      title: "Aliva Priva Jardin",
+      price: "66,353",
+      desc: "Jakarta Garden City Street, Cakung. Pulo Gadung, Jakarta Timur, DKI Jakarta",
+    },
+    {
+      id: 2,
+      img: "./images/r2.png",
+      title: "Asatti Garden City",
+      price: "35,853",
+      desc: "Pahlawan Street XVII No.215, Cinangka, Sawangan, Depok, Jawa Barat",
+    },
+    {
+      id: 3,
+      img: "./images/r3.png",
+      title: "Citralan Puri Serang",
+      price: "47,043",
+      desc: "Ruko Puri Indah Residence Block A7, Lingkar Street, Ciracas, Serang, Banten",
+    },
+    {
+      id: 1,
+      img: "./images/r1.png",
+      title: "Aliva Priva Jardin",
+      price: "66,353",
+      desc: "Jakarta Garden City Street, Cakung. Pulo Gadung, Jakarta Timur, DKI Jakarta",
+    },
+    {
+      id: 2,
+      img: "./images/r2.png",
+      title: "Asatti Garden City",
+      price: "35,853",
+      desc: "Pahlawan Street XVII No.215, Cinangka, Sawangan, Depok, Jawa Barat",
+    },
+    {
+      id: 3,
+      img: "./images/r3.png",
+      title: "Citralan Puri Serang",
+      price: "47,043",
+      desc: "Ruko Puri Indah Residence Block A7, Lingkar Street, Ciracas, Serang, Banten",
+    },
+  ];
+  return (
+    <div className="w-full bg-white px-10 py-4">
+      <h1 className="text-3xl text-primary-500 font-bold">Best Choices</h1>
+      <h1 className="text-5xl text-blue-900 font-bold">Popular Residencies</h1>
+      <div className="px-5 flex items-center justify-between gap-4 overflow-x-auto py-6 hide-scrollbar">
+        {data.map((item) => (
+          <div
+            key={item.id}
+            className="flex flex-col justify-center min-w-[300px] h-[375px] bg-white shadow rounded-lg px-4 py-2 gap-2 hover:shadow-lg hover:scale-95 hover:cursor-pointer transition-all ease-in-out duration-500 hover:bg-gradient-to-t from-red-100 to-blue-100"
+          >
+            <img
+              src={`${item.img}`}
+              alt={item.title}
+              className="w-full h-[200px] object-cover rounded-lg"
+            />
+            <h1 className="text-2xl text-slate-500 font-bold flex gap-2 items-center">
+              <RiExchangeDollarFill className="text-yellow-500 font-bold" />
+              {item.price}
+            </h1>
+            <h1 className="text-2xl text-blue-900 font-bold">{item.title}</h1>
+            <p className="text-sm text-gray-600 tracking-tighter">
+              {item.desc}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+
