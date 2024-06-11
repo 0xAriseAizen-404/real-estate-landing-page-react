@@ -12,7 +12,7 @@ export const ContactUs = () => {
           We always ready to help by providijng the best services for you. We
           beleive a good blace to live can make your life better
         </p>
-        <div className="w-full md:w-5/6 lg:w-full grid grid-cols-2 gap-2 border border-red-500 justify-center items-center">
+        <div className="w-full md:w-5/6 lg:w-full grid grid-cols-2 gap-2 justify-center items-center">
           <Contact title="Call" />
           <Contact title="Chat" />
           <Contact title="Video Call" />
