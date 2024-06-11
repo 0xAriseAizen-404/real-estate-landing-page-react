@@ -20,11 +20,11 @@ export const Accordination = () => {
 
   return (
     <div className="w-full flex min-h-screen flex-col lg:flex-row p-10 lg:gap-10 gap-[5rem]">
-      <div className="lg:w-1/2 w-full flex-center">
+      <div className=" lg:w-3/6 w-full flex-center">
         <img
           src="./images/value.png"
           alt="hero"
-          className="min-h-[60vh] lg:min-h-[80vh] w-3/4 sm:w-3/6 lg:w-full rounded-2xl rounded-t-[15rem]  border-primary-600 border-4"
+          className="min-h-[75vh] lg:h-[90vh] w-full sm:w-4/6 lg:w-5/6 rounded-2xl rounded-t-[15rem]  border-primary-600 border-4"
         />
       </div>
       <div className="lg:w-1/2 w-full flex justify-center items-start flex-col gap-4">

@@ -64,8 +64,8 @@ export default {
         },
         ".circle": {
           position: "absolute",
-          width: "100px",
-          height: "100px",
+          width: "75px",
+          height: "75px",
           "border-radius": "50%",
           "background-color": "orange",
           clipPath: "circle(50% at 50% 50%)",

@@ -22,7 +22,7 @@ export const Contact = ({ title }) => {
   };
 
   return (
-    <div className="text-black flex flex-col gap-4 p-4">
+    <div className="text-black flex flex-col gap-4 p-4 border border-rose-500">
       <div className="flex items-center gap-6">
         <div className={`p-[0.5em] bg-slate-200 rounded-md`}>
           {getIcon(title)}
